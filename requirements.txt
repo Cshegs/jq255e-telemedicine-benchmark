@@ -1,0 +1,13 @@
+# Runtime dependencies for benchmark.py and statistical_audit.py
+#
+# Install with:
+#   pip install -r requirements.txt
+#
+# Python >= 3.10 recommended.  Results in the manuscript were obtained
+# on Python 3.12.2.  The jq255e reference implementation (jq255e.py)
+# uses only the Python standard library.
+
+cryptography>=41.0.0    # X25519, P-256 ECDH, AES-256-GCM
+pandas>=2.0.0           # CSV loading and data manipulation (statistical_audit.py)
+scipy>=1.11.0           # Shapiro-Wilk, Wilcoxon, t-test (statistical_audit.py)
+numpy>=1.24.0           # Numerical utilities (statistical_audit.py)

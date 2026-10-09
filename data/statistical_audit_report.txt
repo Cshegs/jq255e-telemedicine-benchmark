@@ -1,0 +1,240 @@
+================================================================================
+  STATISTICAL AUDIT REPORT
+  A Genus-1 Reformulation of an alpha-beta Modified Edwards-Type Curve
+  for Secure Telemedicine Data Transmission
+================================================================================
+  Input file : data/paired_benchmark_raw.csv
+  Rows       : 1350
+  Curves     : ['P-256', 'X25519', 'jq255e']
+  Operations : ['decryption', 'ecdh', 'encryption']
+  Msg sizes  : [np.int64(13), np.int64(55), np.int64(1000)] bytes
+  Trials/cell: 50
+
+
+================================================================================
+  1. DESCRIPTIVE STATISTICS (microseconds)
+================================================================================
+
+       Msg  Operation                  Curve          Mean            SD           Min           Max
+  ----------------------------------------------------------------------------
+        13  ECDH / shared secret      jq255e     184013.78      95101.58     113135.40     595792.10
+        13  ECDH / shared secret      X25519         99.56         51.79         55.70        356.90
+        13  ECDH / shared secret       P-256        149.17         69.87         82.70        514.50
+
+        13  Encryption                jq255e     277188.38      78333.49     231548.70     741619.80
+        13  Encryption                X25519        240.47        127.03        134.60        750.70
+        13  Encryption                 P-256        263.99         82.21        151.40        612.40
+
+        13  Decryption                jq255e     130831.65      10894.41     115272.80     173068.50
+        13  Decryption                X25519        116.28        132.86         63.50       1014.50
+        13  Decryption                 P-256        199.09        356.34         90.50       2648.40
+
+        55  ECDH / shared secret      jq255e     139684.63      18729.52     114677.50     233954.40
+        55  ECDH / shared secret      X25519         99.42        128.29         55.10        968.70
+        55  ECDH / shared secret       P-256        147.66         93.20         80.90        702.00
+
+        55  Encryption                jq255e     336944.86     122531.48     239057.10     745254.30
+        55  Encryption                X25519        311.04        258.92        136.50       1641.50
+        55  Encryption                 P-256        333.03        181.77        152.70       1309.80
+
+        55  Decryption                jq255e     145524.51      39506.31     115232.70     390065.00
+        55  Decryption                X25519        106.37         47.35         63.90        352.80
+        55  Decryption                 P-256        158.46         59.17         90.20        375.60
+
+      1000  ECDH / shared secret      jq255e     175589.23      22765.78     126921.40     242823.70
+      1000  ECDH / shared secret      X25519         95.69         24.35         55.40        133.90
+      1000  ECDH / shared secret       P-256        187.64        195.18         81.70       1486.10
+
+      1000  Encryption                jq255e     391236.63     125431.51     253262.30     823535.70
+      1000  Encryption                X25519        285.04        146.35        147.50        967.00
+      1000  Encryption                 P-256        403.06        849.66        162.30       6261.60
+
+      1000  Decryption                jq255e     186131.10      46203.81     124634.50     341862.20
+      1000  Decryption                X25519        196.21        389.91         65.20       2636.50
+      1000  Decryption                 P-256        193.17         70.79         99.70        462.40
+
+
+================================================================================
+  2. NORMALITY ASSESSMENT -- SHAPIRO-WILK TEST ON PAIRED DIFFERENCES
+================================================================================
+
+  H0: paired differences are drawn from a normal distribution.
+  Significance level: alpha = 0.05
+
+       Msg  Operation               Comparison                     W          p   Normal?
+  --------------------------------------------------------------------------------
+        13  ECDH / shared secret    jq255e vs X25519          0.5990    < 0.001        No
+        13  ECDH / shared secret    jq255e vs P-256           0.5991    < 0.001        No
+        13  Encryption              jq255e vs X25519          0.4183    < 0.001        No
+        13  Encryption              jq255e vs P-256           0.4182    < 0.001        No
+        13  Decryption              jq255e vs X25519          0.8954    < 0.001        No
+        13  Decryption              jq255e vs P-256           0.9022    < 0.001        No
+
+        55  ECDH / shared secret    jq255e vs X25519          0.7709    < 0.001        No
+        55  ECDH / shared secret    jq255e vs P-256           0.7716    < 0.001        No
+        55  Encryption              jq255e vs X25519          0.7008    < 0.001        No
+        55  Encryption              jq255e vs P-256           0.7013    < 0.001        No
+        55  Decryption              jq255e vs X25519          0.5078    < 0.001        No
+        55  Decryption              jq255e vs P-256           0.5081    < 0.001        No
+
+      1000  ECDH / shared secret    jq255e vs X25519          0.9389      0.012        No
+      1000  ECDH / shared secret    jq255e vs P-256           0.9392      0.013        No
+      1000  Encryption              jq255e vs X25519          0.8053    < 0.001        No
+      1000  Encryption              jq255e vs P-256           0.8049    < 0.001        No
+      1000  Decryption              jq255e vs X25519          0.9053    < 0.001        No
+      1000  Decryption              jq255e vs P-256           0.9059    < 0.001        No
+
+  Summary: 18 of 18 paired-difference distributions rejected normality (p < 0.05).
+  Conclusion: The Wilcoxon signed-rank test is used as the primary inferential test.
+
+
+================================================================================
+  3. PRIMARY INFERENTIAL TEST -- WILCOXON SIGNED-RANK
+================================================================================
+
+  H0: the median of the paired differences equals zero.
+
+       Msg  Operation               Comparison                 W-stat          p   Reject H0?
+  ----------------------------------------------------------------------------------------
+        13  ECDH / shared secret    jq255e vs X25519              0.0    < 0.001          Yes
+        13  ECDH / shared secret    jq255e vs P-256               0.0    < 0.001          Yes
+        13  Encryption              jq255e vs X25519              0.0    < 0.001          Yes
+        13  Encryption              jq255e vs P-256               0.0    < 0.001          Yes
+        13  Decryption              jq255e vs X25519              0.0    < 0.001          Yes
+        13  Decryption              jq255e vs P-256               0.0    < 0.001          Yes
+
+        55  ECDH / shared secret    jq255e vs X25519              0.0    < 0.001          Yes
+        55  ECDH / shared secret    jq255e vs P-256               0.0    < 0.001          Yes
+        55  Encryption              jq255e vs X25519              0.0    < 0.001          Yes
+        55  Encryption              jq255e vs P-256               0.0    < 0.001          Yes
+        55  Decryption              jq255e vs X25519              0.0    < 0.001          Yes
+        55  Decryption              jq255e vs P-256               0.0    < 0.001          Yes
+
+      1000  ECDH / shared secret    jq255e vs X25519              0.0    < 0.001          Yes
+      1000  ECDH / shared secret    jq255e vs P-256               0.0    < 0.001          Yes
+      1000  Encryption              jq255e vs X25519              0.0    < 0.001          Yes
+      1000  Encryption              jq255e vs P-256               0.0    < 0.001          Yes
+      1000  Decryption              jq255e vs X25519              0.0    < 0.001          Yes
+      1000  Decryption              jq255e vs P-256               0.0    < 0.001          Yes
+
+
+================================================================================
+  4. EFFECT SIZES AND CONFIDENCE INTERVALS
+================================================================================
+
+  Mean difference = jq255e minus comparator (positive = jq255e slower).
+  95% CI: t-based interval for the mean paired difference.
+  Cohen's d_z = mean diff / SD of paired differences.
+
+       Msg  Operation               Comparison                 Mean diff                          95% CI      d_z
+  ------------------------------------------------------------------------------------------------------------
+        13  ECDH / shared secret    jq255e vs X25519          183,914.22        [156,888.88, 210,939.56]    1.934
+        13  ECDH / shared secret    jq255e vs P-256           183,864.61        [156,839.08, 210,890.13]    1.933
+        13  Encryption              jq255e vs X25519          276,947.91        [254,690.84, 299,204.98]    3.536
+        13  Encryption              jq255e vs P-256           276,924.38        [254,667.30, 299,181.46]    3.536
+        13  Decryption              jq255e vs X25519          130,715.37        [127,640.42, 133,790.32]   12.081
+        13  Decryption              jq255e vs P-256           130,632.56        [127,592.46, 133,672.67]   12.212
+
+        55  ECDH / shared secret    jq255e vs X25519          139,585.22        [134,262.32, 144,908.11]    7.453
+        55  ECDH / shared secret    jq255e vs P-256           139,536.97        [134,215.59, 144,858.36]    7.452
+        55  Encryption              jq255e vs X25519          336,633.82        [301,816.62, 371,451.02]    2.748
+        55  Encryption              jq255e vs P-256           336,611.84        [301,811.66, 371,412.01]    2.749
+        55  Decryption              jq255e vs X25519          145,418.14        [134,193.16, 156,643.12]    3.682
+        55  Decryption              jq255e vs P-256           145,366.04        [134,148.10, 156,583.99]    3.683
+
+      1000  ECDH / shared secret    jq255e vs X25519          175,493.53        [169,025.27, 181,961.79]    7.711
+      1000  ECDH / shared secret    jq255e vs P-256           175,401.58        [168,930.45, 181,872.72]    7.703
+      1000  Encryption              jq255e vs X25519          390,951.60        [355,323.29, 426,579.90]    3.119
+      1000  Encryption              jq255e vs P-256           390,833.57        [355,190.14, 426,477.00]    3.116
+      1000  Decryption              jq255e vs X25519          185,934.89        [172,801.41, 199,068.37]    4.023
+      1000  Decryption              jq255e vs P-256           185,937.93        [172,813.42, 199,062.45]    4.026
+
+
+================================================================================
+  5. SENSITIVITY ANALYSIS -- PAIRED T-TEST
+================================================================================
+
+  NOTE: The paired t-test is reported as a sensitivity analysis only.
+  The Wilcoxon signed-rank test (Section 3) is the primary test.
+  Results here should not be used as the sole basis for inference
+  given the normality violations documented in Section 2.
+
+       Msg  Operation               Comparison                 t-stat          p   Reject H0?
+  ----------------------------------------------------------------------------------------
+        13  ECDH / shared secret    jq255e vs X25519           13.676    < 0.001          Yes
+        13  ECDH / shared secret    jq255e vs P-256            13.672    < 0.001          Yes
+        13  Encryption              jq255e vs X25519           25.005    < 0.001          Yes
+        13  Encryption              jq255e vs P-256            25.003    < 0.001          Yes
+        13  Decryption              jq255e vs X25519           85.427    < 0.001          Yes
+        13  Decryption              jq255e vs P-256            86.351    < 0.001          Yes
+
+        55  ECDH / shared secret    jq255e vs X25519           52.698    < 0.001          Yes
+        55  ECDH / shared secret    jq255e vs P-256            52.695    < 0.001          Yes
+        55  Encryption              jq255e vs X25519           19.430    < 0.001          Yes
+        55  Encryption              jq255e vs P-256            19.438    < 0.001          Yes
+        55  Decryption              jq255e vs X25519           26.034    < 0.001          Yes
+        55  Decryption              jq255e vs P-256            26.041    < 0.001          Yes
+
+      1000  ECDH / shared secret    jq255e vs X25519           54.523    < 0.001          Yes
+      1000  ECDH / shared secret    jq255e vs P-256            54.470    < 0.001          Yes
+      1000  Encryption              jq255e vs X25519           22.051    < 0.001          Yes
+      1000  Encryption              jq255e vs P-256            22.035    < 0.001          Yes
+      1000  Decryption              jq255e vs X25519           28.450    < 0.001          Yes
+      1000  Decryption              jq255e vs P-256            28.470    < 0.001          Yes
+
+
+================================================================================
+  6. MANUSCRIPT TABLE 5 -- SHAPIRO-WILK + FULL PAIRED COMPARISON
+================================================================================
+
+  This table can be copied directly into the revised manuscript.
+
+         Msg  Operation               Comparison               W (S-W)    p (S-W)   Normal?    Mean diff (µs)                         95% CI (µs)      d_z   Wilcoxon p
+  --------------------------------------------------------------------------------------------------------------------------------------------
+    13 bytes  ECDH / shared secret    jq255e vs X25519          0.5990    < 0.001        No        183,914.22            [156,888.88, 210,939.56]    1.934      < 0.001
+    13 bytes  ECDH / shared secret    jq255e vs P-256           0.5991    < 0.001        No        183,864.61            [156,839.08, 210,890.13]    1.933      < 0.001
+    13 bytes  Encryption              jq255e vs X25519          0.4183    < 0.001        No        276,947.91            [254,690.84, 299,204.98]    3.536      < 0.001
+    13 bytes  Encryption              jq255e vs P-256           0.4182    < 0.001        No        276,924.38            [254,667.30, 299,181.46]    3.536      < 0.001
+    13 bytes  Decryption              jq255e vs X25519          0.8954    < 0.001        No        130,715.37            [127,640.42, 133,790.32]   12.081      < 0.001
+    13 bytes  Decryption              jq255e vs P-256           0.9022    < 0.001        No        130,632.56            [127,592.46, 133,672.67]   12.212      < 0.001
+    55 bytes  ECDH / shared secret    jq255e vs X25519          0.7709    < 0.001        No        139,585.22            [134,262.32, 144,908.11]    7.453      < 0.001
+    55 bytes  ECDH / shared secret    jq255e vs P-256           0.7716    < 0.001        No        139,536.97            [134,215.59, 144,858.36]    7.452      < 0.001
+    55 bytes  Encryption              jq255e vs X25519          0.7008    < 0.001        No        336,633.82            [301,816.62, 371,451.02]    2.748      < 0.001
+    55 bytes  Encryption              jq255e vs P-256           0.7013    < 0.001        No        336,611.84            [301,811.66, 371,412.01]    2.749      < 0.001
+    55 bytes  Decryption              jq255e vs X25519          0.5078    < 0.001        No        145,418.14            [134,193.16, 156,643.12]    3.682      < 0.001
+    55 bytes  Decryption              jq255e vs P-256           0.5081    < 0.001        No        145,366.04            [134,148.10, 156,583.99]    3.683      < 0.001
+  1000 bytes  ECDH / shared secret    jq255e vs X25519          0.9389      0.012        No        175,493.53            [169,025.27, 181,961.79]    7.711      < 0.001
+  1000 bytes  ECDH / shared secret    jq255e vs P-256           0.9392      0.013        No        175,401.58            [168,930.45, 181,872.72]    7.703      < 0.001
+  1000 bytes  Encryption              jq255e vs X25519          0.8053    < 0.001        No        390,951.60            [355,323.29, 426,579.90]    3.119      < 0.001
+  1000 bytes  Encryption              jq255e vs P-256           0.8049    < 0.001        No        390,833.57            [355,190.14, 426,477.00]    3.116      < 0.001
+  1000 bytes  Decryption              jq255e vs X25519          0.9053    < 0.001        No        185,934.89            [172,801.41, 199,068.37]    4.023      < 0.001
+  1000 bytes  Decryption              jq255e vs P-256           0.9059    < 0.001        No        185,937.93            [172,813.42, 199,062.45]    4.026      < 0.001
+
+  Note: n = 50 paired observations per comparison.
+  Mean difference = jq255e minus comparator.
+  Positive values indicate longer execution times for jq255e.
+  95% CIs are t-based intervals for the mean paired difference.
+  Cohen's d_z = paired effect size.
+
+
+================================================================================
+  7. SUMMARY
+================================================================================
+
+  Total paired comparisons analysed : 18
+  Non-normal paired differences (S-W, alpha=0.05): 18 of 18
+  Primary test (Wilcoxon) -- all p < 0.001 : True
+  Cohen's d_z range: 1.933 to 12.212 (all large by conventional thresholds, d_z >= 0.80)
+
+  Interpretation: All 18 paired comparisons show statistically
+  significant and practically large differences, with jq255e
+  requiring substantially more execution time than both X25519
+  and P-256 across every operation and message size evaluated.
+  These differences reflect the use of an unoptimised pure-Python
+  affine reference implementation for jq255e versus optimised
+  C-library routines for X25519 and P-256, and do not establish
+  that the underlying genus-1 curve is intrinsically slower.
+
+================================================================================
+  END OF STATISTICAL AUDIT REPORT
+================================================================================
